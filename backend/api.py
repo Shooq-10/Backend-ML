@@ -5,6 +5,7 @@ import lightgbm as lgb
 import unicodedata
 import os
 import gdown
+import pickle
 
 app = Flask(__name__)
 CORS(app)
@@ -75,7 +76,21 @@ params = {
     'bagging_fraction': 0.8,
 }
 
-model = lgb.train(params, lgb_train, num_boost_round=200)
+# Function to load the trained model
+def load_model():
+    model_path = os.path.join(os.path.dirname(__file__), 'backend', 'model.pkl')
+    with open(model_path, "rb") as model_file:
+        model = pickle.load(model_file)
+    return model
+
+# Check if the model exists, if not, train it and save it
+model_path = os.path.join(os.path.dirname(__file__), 'backend', 'model.pkl')
+if not os.path.exists(model_path):
+    model = lgb.train(params, lgb_train, num_boost_round=200)
+    with open(model_path, "wb") as model_file:
+        pickle.dump(model, model_file)
+else:
+    model = load_model()  # Load model if it already exists
 
 @app.route('/districts', methods=['GET'])
 # Function to retrieve and process districts based on a given city name.
@@ -182,10 +197,3 @@ def predict():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))  # Default to 10000 if no PORT is provided
     app.run(debug=True, host="0.0.0.0", port=port)
-
-
-import pickle
-
-# حفظ النموذج داخل مجلد backend
-with open("backend/model.pkl", "wb") as model_file:
-    pickle.dump(model, model_file)
