@@ -1,1 +1,1 @@
-web: gunicorn api:app
+web: gunicorn -w 1 -b 0.0.0.0:10000 backend.api:app
