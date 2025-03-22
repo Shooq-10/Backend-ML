@@ -180,6 +180,7 @@ def predict():
     return jsonify({'predicted_price': predicted_price})
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=10000)
+    port = int(os.environ.get("PORT", 10000))  # Default to 10000 if no PORT is provided
+    app.run(debug=True, host="0.0.0.0", port=port)
 
 
