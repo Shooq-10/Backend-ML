@@ -184,3 +184,8 @@ if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=port)
 
 
+import pickle
+
+# حفظ النموذج داخل مجلد backend
+with open("backend/model.pkl", "wb") as model_file:
+    pickle.dump(model, model_file)
