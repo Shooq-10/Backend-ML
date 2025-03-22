@@ -170,3 +170,9 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=10000)
+
+import os
+
+# التحقق من الملفات داخل مجلد backend
+print("Current Working Directory:", os.getcwd())
+print("Files in backend:", os.listdir('backend'))
