@@ -4,9 +4,20 @@ import pandas as pd
 import lightgbm as lgb
 import unicodedata
 import os
+import gdown
 
 app = Flask(__name__)
 CORS(app)
+
+# رابط Google Drive للملف الأول
+file_url_1 = "https://drive.google.com/uc?export=download&id=14NvMle4WWhtNj6O85DoxeqX-oIFKNn6z"
+output_file_1 = './backend/train_90.csv'
+gdown.download(file_url_1, output_file_1, quiet=False)
+
+# رابط Google Drive للملف الثاني
+file_url_2 = "https://drive.google.com/uc?export=download&id=14_EK-scn8Za-9oHKAMldS_T7TADz4xl8"
+output_file_2 = './backend/befpreprocess.csv'
+gdown.download(file_url_2, output_file_2, quiet=False)
 
 # Mapping property types to numerical values for standardization purposes.
 # The arabic and english.
