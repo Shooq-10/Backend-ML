@@ -36,7 +36,7 @@ english_to_arabic_city_map = {
 }
 
 train_data = pd.read_csv('./backend/train_90.csv')
-befpreprocess_data = pd.read_csv('befpreprocess.csv')
+befpreprocess_data = pd.read_csv('./backend/befpreprocess.csv')
 
 befpreprocess_data['city'] = befpreprocess_data['city'].apply(normalize_text)
 befpreprocess_data['district'] = befpreprocess_data['district'].apply(normalize_text)
